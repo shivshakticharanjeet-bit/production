@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Definition of a product manufactured in the factory.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the product" },
+        "category": { "type": "string", "description": "Category of the product" },
+        "targetDaily": { "type": "number", "description": "Daily production target" },
+        "unit": { "type": "string", "description": "Unit of measurement (e.g., pcs, kg)" }
+      },
+      "required": ["name", "targetDaily"]
+    },
+    "ProductionRecord": {
+      "title": "Production Record",
+      "description": "Daily production data for a specific product.",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "description": "ID of the product" },
+        "date": { "type": "string", "format": "date", "description": "Date of production (YYYY-MM-DD)" },
+        "startTime": { "type": "string", "description": "Time when production started" },
+        "endTime": { "type": "string", "description": "Time when production ended" },
+        "quantity": { "type": "number", "description": "Total quantity produced" },
+        "reasonForLow": { "type": "string", "description": "Reason for lower than target production" },
+        "uid": { "type": "string", "description": "User ID of the record creator" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "System creation timestamp" }
+      },
+      "required": ["productId", "date", "quantity", "uid"]
+    }
+  },
+  "firestore": {
+    "products": {
+      "schema": "Product",
+      "description": "List of products managed in the system."
+    },
+    "productionRecords": {
+      "schema": "ProductionRecord",
+      "description": "Daily production logs."
+    }
+  }
+}

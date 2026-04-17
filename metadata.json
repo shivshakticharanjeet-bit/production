@@ -1,0 +1,6 @@
+{
+  "name": "Factory Production Monitor",
+  "description": "Comprehensive tracking and efficiency analysis for factory daily production records.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["Charts", "Data Tracking", "Efficiency Analysis"]
+}

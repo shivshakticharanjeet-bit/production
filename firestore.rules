@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: products
+    // Fields:
+    //   - name: string (required)
+    //   - category: string (optional)
+    //   - targetDaily: number (required)
+    //   - unit: string (optional)
+    //
+    // Collection: productionRecords
+    // Fields:
+    //   - productId: string (required)
+    //   - date: string (required, YYYY-MM-DD)
+    //   - startTime: string (optional)
+    //   - endTime: string (optional)
+    //   - quantity: number (required)
+    //   - reasonForLow: string (optional)
+    //   - uid: string (required, creator)
+    //   - createdAt: timestamp (required)
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isValidProduct(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.targetDaily is number && data.targetDaily >= 0 &&
+             (!('category' in data) || (data.category is string && data.category.size() < 100)) &&
+             (!('unit' in data) || (data.unit is string && data.unit.size() < 20));
+    }
+
+    function isValidRecord(data) {
+      return data.productId is string &&
+             data.date is string && data.date.matches("^\\d{4}-\\d{2}-\\d{2}$") &&
+             data.quantity is number && data.quantity >= 0 &&
+             (!('reasonForLow' in data) || (data.reasonForLow is string && data.reasonForLow.size() < 500));
+    }
+
+    match /products/{productId} {
+      allow read, write: if true;
+    }
+
+    match /productionRecords/{recordId} {
+      allow read, write: if true;
+    }
+  }
+}
