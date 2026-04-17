@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "Space Mono", "Courier New", Courier, monospace;
+  --font-serif: "Georgia", serif;
+  --font-sans: "Helvetica Neue", Arial, sans-serif;
+  
+  --color-paper: #f9f8f5;
+  --color-ink: #1a1a1a;
+  --color-accent: #d94e28;
+  --color-muted: #8c8c88;
+  --color-line: #e2e1de;
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-ink font-sans;
+  }
+}
+
+.data-row {
+  @apply transition-colors duration-200 cursor-pointer border-b border-line hover:bg-ink hover:text-paper;
+}
+
+.col-header {
+  @apply font-sans font-bold text-[10px] uppercase tracking-[0.2em] text-muted mb-2;
+}
+
+.big-number {
+  @apply font-serif text-6xl leading-none tracking-tighter;
+}
+
+.data-value {
+  @apply font-sans tracking-tight;
+}
+
+.editorial-card {
+  @apply bg-white border border-line p-6 shadow-sm rounded-none;
+}
+
+.accent-tag {
+  @apply bg-accent text-white px-1.5 py-0.5 text-[9px] uppercase font-bold tracking-wider;
+}
